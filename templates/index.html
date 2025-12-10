@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>保形形式 計算機</title>
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+        },
+      };
+    </script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+    ></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .result-box {
+        padding: 20px;
+        background-color: #f0f8ff;
+        border-radius: 8px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>保形形式 $q$-展開 計算機</h1>
+
+    <form method="POST">
+      <label>
+        $E_4$展開次数 ($q^n$ まで):
+        <input
+          type="number"
+          name="terms"
+          value="{{ current_terms }}"
+          min="1"
+          max="50"
+        />
+      </label>
+      <button type="submit">計算実行</button>
+    </form>
+
+    {% if formula %}
+    <div class="result-box">
+      <h3>計算結果:</h3>
+      $$ {{ formula }} $$
+    </div>
+    {% endif %}
+  </body>
+</html>
