@@ -1,117 +1,48 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
     <title>保形形式 計算機</title>
     <script>
-      MathJax = {
-        tex: {
-          inlineMath: [
-            ["$", "$"],
-            ["\\(", "\\)"],
-          ],
-        },
-      };
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
     </script>
-    <script
-      id="MathJax-script"
-      async
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
-    ></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <style>
-      body {
-        font-family: sans-serif;
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-      .result-box {
-        padding: 20px;
-        background-color: #f0f8ff;
-        border-radius: 8px;
-        margin-top: 20px;
-      }
-      .form-group {
-        margin-bottom: 15px;
-      }
+        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .result-box { padding: 20px; background-color: #f0f8ff; border-radius: 8px; margin-top: 20px; }
+        .form-group { margin-bottom: 15px; }
     </style>
-  </head>
-  <body>
-    <h1>保形形式 $q$-展開 計算機</h1>
-    <p>中川奨麻</p>
+</head>
+<body>
+    <h1>保形形式 $q$-展開 計算機</h1>    
     <form method="POST">
-      <div class="form-group">
-        <label>計算する関数:</label>
-        <select name="func_type">
-          <option
-            value="E_k"
-            {%
-            if
-            selected_func=""
-            ="E_k"
-            %}selected{%
-            endif
-            %}
-          >
-            標準 E_k (SL2(Z))
-          </option>
-          <option
-            value="E_theta"
-            {%
-            if
-            selected_func=""
-            ="E_theta"
-            %}selected{%
-            endif
-            %}
-          >
-            E_k^theta (Gamma_theta)
-          </option>
-          <option
-            value="E_theta_plus"
-            {%
-            if
-            selected_func=""
-            ="E_theta_plus"
-            %}selected{%
-            endif
-            %}
-          >
-            E_k^theta+ (Gamma_theta)
-          </option>
-        </select>
-      </div>
+        <div class="form-group">
+            <label>計算する関数:</label>
+            <select name="func_type">
+                <option value="E_k" {% if selected_func == 'E_k' %}selected{% endif %}>標準 E_k (SL2(Z))</option>
+                <option value="E_theta" {% if selected_func == 'E_theta' %}selected{% endif %}>E_k^theta (Gamma_theta)</option>
+                <option value="E_theta_plus" {% if selected_func == 'E_theta_plus' %}selected{% endif %}>E_k^theta+ (Gamma_theta)</option>
+            </select>
+        </div>
 
-      <div class="form-group">
-        <label>重さ k (2以上の偶数):</label>
-        <input
-          type="number"
-          name="weight"
-          value="{{ current_weight }}"
-          min="2"
-          step="2"
-        />
-      </div>
+        <div class="form-group">
+            <label>重さ k (2以上の偶数):</label>
+            <input type="number" name="weight" value="{{ current_weight }}" min="2" step="2">
+        </div>
 
-      <div class="form-group">
-        <label>展開次数 ($q^n$ まで):</label>
-        <input
-          type="number"
-          name="terms"
-          value="{{ current_terms }}"
-          min="1"
-          max="50"
-        />
-      </div>
-
-      <button type="submit">計算実行</button>
+        <div class="form-group">
+            <label>展開次数 ($q^n$ まで):</label>
+            <input type="number" name="terms" value="{{ current_terms }}" min="1" max="50">
+        </div>
+        
+        <button type="submit">計算実行</button>
     </form>
 
     {% if formula %}
     <div class="result-box">
-      <h3>計算結果:</h3>
-      $$ {{ formula }} $$
+        <h3>計算結果:</h3>
+        $$ {{ formula }} $$
     </div>
     {% endif %}
-  </body>
+</body>
 </html>
